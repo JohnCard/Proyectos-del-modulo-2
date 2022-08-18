@@ -181,7 +181,7 @@ Conclusión Final: {conclusión}
 ''')
 
 # En caso de que el usuario digite directamente que no esta interesado con un n, el programa acabará inmediatamente con un mensaje de
-# despedida 🙋‍♂️.
+# despedida 🙋‍♂️. 
 elif(answer_prim == 'n' or answer_prim == 'N'):
     print('''\n En ese caso, Usted ya ha llegado al final del programa. 
 \n''')
