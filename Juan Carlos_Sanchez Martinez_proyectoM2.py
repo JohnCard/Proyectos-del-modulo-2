@@ -1,15 +1,31 @@
 # Programa para verificar el cuadrante de una coordenada.
 
-# Aqui digitamos unas cuantas variables con distintos valores a leer por otras funciones para despues validar distintos datos y 
-# asegurarnos de que el usuario digite bien sus respuestas, con los distintos caracteres que claramente esperariamos que por error
-# podria poner al llenar el formulario
+# Aqui digitamos una variable fundamental a ser estudiada por la funcion evaluar_variable_uno()
 
 cuarta_variable = '-123456789.'
 
+# Esta funcion ayudará a verificar que el usuario no digite mal un dato de tipo numerico o float al momento de digitar coordenadas para
+# estudiar sus cuadrantes en el que se encuentren
 def evaluar_variable_uno(param):
+    # inicializaremos estas variables con 0, las cuales se les aumentara un uno en uno si esque su condición se cumple para asi verificar
+    # el error y prevenir que lo pase por alto el usuario
     cont_tres = 0
+    cont_cuatro = 0
+    cont_cinco = 0
     for i in param:
-        if i not in cuarta_variable:
+        # el objetivo de esta condicional esque si el cont_cuatro llegase a superar el uno durante el recorrido del for en el param o la
+        # cadena digitada por el usuario, es porque hay mas de un '.' en el dato y eso claro que no esta permitido en un dato numerico
+        # sea normal o decimal
+        if i == '.':
+            cont_cuatro += 1
+        # el objetivo de esta condicional esque si el cont_cinco llegase a superar el uno durante el recorrido del for en el param o la
+        # cadena digitada por el usuario, es porque hay mas de un '-' en el dato y eso claro que no esta permitido en un dato numerico
+        # sea normal o decimal
+        if i == '-':
+            cont_cinco += 1
+        # el objetivo de esta condicional esque si se cumple almenos una de estas condiciones, se le aumentará un uno, y para esta 
+        # variable (cont_tres) solo basta con un uno para indicar que hay un error en el dato del usuario
+        if((i not in cuarta_variable) or (cont_cuatro > 1) or (cont_cinco > 1) or (float(param) < 0)):
             cont_tres += 1
     return cont_tres
 
@@ -35,7 +51,7 @@ def leervar_quint(param):
 # Esta funcion ayudará a verificar que cuando al usuario le toqué digitar las correspondientes coordenadas, no haya valor igual a 0
 # o que simplemente se asegure que sean numericas (de tipo float incluidas).
 def evld_var(param):
-    while(evaluar_variable_uno(param) > 0 or '..' in param):
+    while(evaluar_variable_uno(param) > 0):
         param = input('Favor de digitar su variable de nuevo: ')
     return float(param)
     
