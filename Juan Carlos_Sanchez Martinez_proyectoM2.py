@@ -3,38 +3,20 @@
 # Aqui digitamos unas cuantas variables con distintos valores a leer por otras funciones para despues validar distintos datos y 
 # asegurarnos de que el usuario digite bien sus respuestas, con los distintos caracteres que claramente esperariamos que por error
 # podria poner al llenar el formulario
-var_prim = 'ZXCVBMASDFGHJKLÑQWERTUIOP¨¨+*~[]^``/|¬°!"#$%&()=-_;:,zxcvbmasdfghjklñqwertuiop 1234567890.'
 
-var_seg = 'ZXCVBNMASDFGHJKLÑQWERTYUIOP¨¨+*~[]^``/|¬°!"#$%&()=_;:,zxcvbnmasdfghjklñqwertyuiop '
+cuarta_variable = '-123456789.'
 
-var_ter = 'ZXCVNMSDFGHJKLÑQWERTYUIOP¨¨+*~[]^``/|¬°!"#$%&()=-_;:,zxcvnmsdfghjklñqwertyuiop 1234567890.'
+def evaluar_variable_uno(param):
+    cont_tres = 0
+    for i in param:
+        if i not in cuarta_variable:
+            cont_tres += 1
+    return cont_tres
 
 # Estas variables se usaran a lo largo de este programa para que al preguntarle al usuario de si le gusto o no el programa, estas 
 # cuenten de uno en uno las cantidad de valoraciones ya sean positivas o negativas dependiendo de si el usuario responde con un "Y" o un
 # "N" (en ingles yes o no)
 cont = 0; cont_seg = 0
-
-# Esta es la funcion que recibe como parametro una palabra o caracter (xy) y una cadena de otros caracteres a evaluar (x) para despues
-# ir contando de uno en uno si esque efectivamente llega a encontrarse con uno de estos caracteres, al final si el return devuelve 
-# algo mayor a 0, significaria que el usuario efectivamente esta llenando mal el formulario
-def leerparams(xy,x):
-    cont = 0
-    for i in xy:
-        if i in x:
-            cont +=1
-    return cont
-
-# Esta funcion verificará la variable var_seg
-def leervar_prim(param):
-    return leerparams(param,var_seg)
-
-# Esta funcion verificará la variable var_prim
-def leervar_seg(param):
-    return leerparams(param,var_prim)
-
-# Esta funcion verificará la variable var_ter
-def leervar_tir(param):
-    return leerparams(param,var_ter)
 
 # Esta funcion ayudará a verificar para cuando al usuario le toqué responder de si quiere trabajar en el plano 3D o 2D, ya que si llega-
 # rá a responder algo diferente de los incisos a) ó b), le lanzará al usuario que debe digitar su respuesta de nuevo.
@@ -50,23 +32,12 @@ def leervar_quint(param):
         param = input('Favor de ingresar de nuevo el dato por favor (Y/N): ')
     return param
 
-# Aqui la funcion recorr_un(), validará si el usuario al tener que digitar algun dato numerico, lo digita 
-# con mas de un punto decimal, ya que si se cumple que en el recorrido del string (param) o cadena digitada por el usuario durante
-# el input(___), efectivamente hace el conteo y el return devuelve un valor 
-# mayor a uno, significa que efectivamente hay mas de un punto decimal (lect) en su cadena o string.
-def recorr_un(param, lect):
-    cont = 0
-    for i in param:
-        if i == lect:
-            cont += 1
-    return cont
-
 # Esta funcion ayudará a verificar que cuando al usuario le toqué digitar las correspondientes coordenadas, no haya valor igual a 0
 # o que simplemente se asegure que sean numericas (de tipo float incluidas).
-def evld_var(xy):
-    while(leervar_prim(xy) > 0 or len(xy) == 0 or recorr_un(xy,'.') > 1 or float(xy) == 0):
-        xy = input('Favor de digitar su variable de nuevo: ')
-    return float(xy)
+def evld_var(param):
+    while(evaluar_variable_uno(param) > 0 or '..' in param):
+        param = input('Favor de digitar su variable de nuevo: ')
+    return float(param)
     
 # Esta es la función dedicada a leer coordenadas de tipo 2D en caso de que el usuario digite la "a" para el inciso a) 
 def CalC_Cuad():
@@ -128,10 +99,10 @@ answer_prim = leervar_quint(answer_prim)
 # Si es que la respuesta efectivamente fue si o digito algun error, iniciará un bucle en el cual, mientras quiera, puede seguir buscando
 # otros octanes o cuadrantes de distintas coordenadas o intentar digitar su respuesta de nuevo hasta hacerlo bien, esto gracias a la 
 # lógica escrita en los parentesis de abajo, que dependiendo de las repsuestas, realizarán ciertas instrucciones
-if(answer_prim == 'y' or answer_prim == 'Y' or len(answer_prim) == 0 or leervar_seg(answer_prim) > 0 or 'yy' in answer_prim or 'YY' in answer_prim or 'NN' in answer_prim or 'nn' in answer_prim):
+if(answer_prim == 'y' or answer_prim == 'Y'):
     
     # Es aqui donde efectivamente inicia el ciclo, yaque antes fue simplemente una validación
-    while(answer_prim == 'y' or answer_prim == 'Y' or len(answer_prim) == 0 or leervar_seg(answer_prim) > 0 or 'yy' in answer_prim or 'YY' in answer_prim or 'NN' in answer_prim or 'nn' in answer_prim):
+    while(answer_prim == 'y' or answer_prim == 'Y'):
         
         # Si es que digita correctamente un si o y para este caso, iniciará ahora si ha preguntarle todo lo necesario para buscar el
         # estado en el que se encuentra una coordenada 
@@ -181,7 +152,7 @@ Conclusión Final: {conclusión}
 ''')
 
 # En caso de que el usuario digite directamente que no esta interesado con un n, el programa acabará inmediatamente con un mensaje de
-# despedida 🙋‍♂️. 
+# despedida 🙋‍♂️.
 elif(answer_prim == 'n' or answer_prim == 'N'):
     print('''\n En ese caso, Usted ya ha llegado al final del programa. 
 \n''')
