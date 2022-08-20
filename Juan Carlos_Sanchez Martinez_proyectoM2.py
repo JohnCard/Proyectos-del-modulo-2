@@ -162,7 +162,7 @@ elif(answer_prim == 'n' or answer_prim == 'N'):
 # Programa para medir la longitud de una palabra
 
 
-answer = input('\n Desea digitar algun mensaje (S/N): ')
+answer = input('\n Desea digitar alguna palabra (S/N): ')
 
 # Validamos la respuesta anterior del usuario, para asegurarnos de que la digite de acuerdo a lo que se le solicita escribir
 while(answer != 'S' and answer != 's' and answer != 'n' and answer != 'N'):
@@ -171,22 +171,15 @@ while(answer != 'S' and answer != 's' and answer != 'n' and answer != 'N'):
 # Una vez validada su respuesta, si es que dijo que si con "S", mientras la variable answer sea igual a 's', significará que el bucle
 # continuará o que el usuario quiere seguir intentando con mas mensajes de prueba
 while(answer == 'S' or answer == 's'):
-    palabra = input('Digite su correspondiente mensaje o frase: ')
-    ''' Inicializamos un arreglo vacio por ahora para que reserve todas las palabras en el mensaje del usuario con el metodo .split()
-    para que de manera predeterminada las separe por cada espacio en blanco y al contarlas seamos capaces de medir la longitud de este 
-    arreglo o lista nueva (fixture)'''
-    fixture = []
+    palabra = input('Digite su correspondiente palabra: ')
+    cantidad = len(palabra)
     
-    # Procedemos a agregarle las palabras del mensaje nuevo
-    fixture.extend(palabra.split())
-    
-    # Y de acuerdo a la longitud dela nueva lista, dependiendo de ello, mostraremos diferentes mensjaes de conclusión
-    if(len(fixture) >= 4 and len(fixture) <= 8):
-        print(f'Su mensaje "{palabra}" es ¡CORRECTO!')
-    elif(len(fixture) < 4):
-        print(f'Hacen falta letras. Solo tiene "{len(fixture)}" letras.')
-    elif(len(fixture) > 8):
-        print(f'Sobran letras. Tiene "{len(fixture)}" letras.')
+    if(cantidad >= 4 and cantidad <= 8):
+        print(f'Su palabra "{palabra}" es ¡CORRECTO!')
+    elif(cantidad < 4):
+        print(f'Hacen falta letras. Solo tiene "{cantidad}" letras.')
+    elif(cantidad > 8):
+        print(f'Sobran letras. Tiene "{cantidad}" letras.')
     
     answer = input('Le gustaria volver a intentarlo (S/N)? ')
     while(answer != 'S' and answer != 's' and answer != 'n' and answer != 'N'):
